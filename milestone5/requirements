@@ -1,0 +1,9 @@
+pip install flask
+pip install flask_login
+pip install werkzeug
+pip install pandas
+pip install nltk
+pip install sklearn
+
+#open website 
+run: python flaskapp.py

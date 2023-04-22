@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="col-md-4 mx-auto my-5">
+    <div><p style="font-size: xx-large;font-weight: 400;" class="text-center">Profile</p></div>
+    <div class="card">
+        <table class="table">
+            <tr>
+                <td>First Name </td>
+                <td> : {{fname}}</td>
+            </tr>
+            <tr>
+                <td>Last Name </td>
+                <td> : {{lname}}</td>
+            </tr>
+            <tr>
+                <td>Email </td>
+                <td> : {{email}}</td>
+            </tr>
+        </table>
+        
+    </div>
+</div>
+
+{% endblock %}

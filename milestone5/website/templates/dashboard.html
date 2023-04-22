@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="col-md-12 mx-auto ">
+  
+  <form method="POST" action="/dashboard">
+    <div class="row">
+      <div class="col-3">
+        <span style="font-size: x-large;" >Kernel : </span>
+        <div class="select">
+        <select name="kernel">
+          <option value="linear">Linear</option>
+            <option value="poly">Poly</option>
+            <option value="rbf">RBF</option>
+            <option value="sigmoid">Sigmoid</option>
+        </select>
+        </div>
+      </div>
+      <div class="col-3">
+        <span style="font-size: x-large;">Dataset: </span>
+        <div class="select">
+            <select name="dataset">
+                <option value="webex">Webex</option>
+                <option value="zoom">Zoom</option>
+            </select>
+        </div>
+      </div>
+      <div class="col-3">
+        <button type="submit" class="button is-block is-info">Load Model</button>
+
+      </div>
+      
+     
+    </div>
+    
+  </form>
+
+  <div style="margin-top: 50px;" class="card">
+    <div class="table-responsive">
+
+{% if not loaded %}
+<p style="font-size: x-large;margin-top: 60px;">load model to see more..</p>
+{% endif %}
+
+{% if loaded %}
+<div class="row" style="margin:30px">
+    <div class="col-6">
+      <div class="field">
+        <label class="label">Top 10 words for predicting 'new' features</label>
+          <p>{{old}}</p>
+      </div>
+      <div class="field">
+        <label class="label">Top 10 words for predicting 'old' features</label>
+          <p>{{new}}</p>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="row" style="margin-left: 30px;">
+        <form method="POST" action="/predict">
+        <div class="col">
+          <div class="field">
+            <label class="label">Enter text to predict:</label>
+          </div>
+        </div>
+        <div class="col">
+          <div class="field">
+            <input class="input" type="text" name="text">
+            <button type="submit" class="button is-primary">Predict</button>
+          </div>
+        </div>
+        </form>
+        <div>
+            {% if  text|length >0 %}
+            <div style="margin-top: 10px;" class="field">
+                <label class="label">{{text}} : {{output}}</label>
+              </div>
+              {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+</div>
+  </div>
+</div>
+
+<style>
+.card {
+  height: 300px;
+  overflow-x: auto;
+}
+.table {
+  width: auto !important;
+  min-width: 100%;
+}
+.field label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: inline-block;
+}
+.field input, .field textarea {
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  width: 100%;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.field .control {
+  margin-bottom: 20px;
+}
+.field .button {
+  margin-top: 10px;
+}
+</style>
+
+{% endblock %}
